@@ -160,8 +160,10 @@ function parseNumberFromString(value) {
  *   3,3,3   => 5.196152422706632
  *   1,2,3   => 3.741657386773941
  */
-function getParallelipidedDiagonal(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getParallelipidedDiagonal(a, b, c) {
+  let d = 0;
+  d = (a) ** 2 + (b) ** 2 + (c) ** 2;
+  return Math.sqrt(d);
 }
 
 /**
@@ -181,8 +183,26 @@ function getParallelipidedDiagonal(/* a, b, c */) {
  *   1678, 2  => 1700
  *   1678, 3  => 2000
  */
-function roundToPowerOfTen(/* num, pow */) {
-  throw new Error('Not implemented');
+function roundToPowerOfTen(num, pow) {
+  const result = num.toString().split('');
+  let extra = 0;
+
+  for (let i = result.length; i > result.length - pow; i -= 1) {
+    const value = Number(result[i - 1]);
+
+    result[i - 1] = 0;
+    if (value > 5) {
+      if (i > 0) {
+        result[i - 2] = +result[i - 2] + 1;
+        if (result[i - 2] > 9) {
+          result[i - 2] -= 1;
+          extra = 10 ** (result.length - i + 1);
+        }
+      }
+    }
+  }
+
+  return Number(result.join('')) + extra;
 }
 
 /**
